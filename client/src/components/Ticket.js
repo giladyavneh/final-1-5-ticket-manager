@@ -15,10 +15,12 @@ function Ticket(props){
         <div className="ticket">
             <h1>{props.title}</h1>
             <div className="content">{props.content}</div>
-            <div className="info">
-            <span>{props.email}</span> | <span>{props.time}</span>
+            <div className="footer">
+                <div className="info">
+                    <span>{props.email}</span> | <span>{props.time}</span>
+                </div>
+                <div className="labels">{labels}</div>
             </div>
-            <div className="labels">{labels}</div>
             
         </div>
     )
