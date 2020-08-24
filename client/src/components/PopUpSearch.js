@@ -26,7 +26,7 @@ function PopUpSearch(props){
                     horizontal: 'center',
                 }}
             >
-                <input onChange={(e)=>props.search(e.target.value)}/>
+                <input id="searchInput" onChange={(e)=>props.search(e.target.value)}/>
             </Popover>
         </div>
     );

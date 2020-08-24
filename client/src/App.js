@@ -11,7 +11,8 @@ function App() {
   })
 },[])
   const renderTickets=()=>tickets.map(ticket=><Ticket key={ticket.id} title={ticket.title}
-    content={ticket.content} labels={ticket.labels}/>)
+    content={ticket.content} email={ticket.userEmail}
+    time={new Date(ticket.creationTime).toISOString().slice(0,-5).replace("T"," ")} labels={ticket.labels}/>)
   const search=(input)=>{
     let url="/api/tickets?searchText="+encodeURIComponent(input)
     fetch(url).then(res=>res.json()).then(res=>setTickets(res))
