@@ -1,18 +1,25 @@
-import React from "react";
+import React, {useState, useEffect} from 'react';
 import "./Ticket.css"
-import {Button} from "@material-ui/core"
 
 function Ticket(props){
-
+    const [klass,setKlass]=useState("ticket")
     if (props.labels) {
-        var labels = props.labels.map((label,i) => {
+        var labels = props.labels.map(label => {
             return (
-                <Button key={i} variant="contained" color="primary" className="label">{label}</Button>
-                    )
+                <span className="label">{label}</span>
+                 )
         })
     }
+    useEffect(()=>setKlass("ticket"),[props.restore])
+
+    const hide=()=>{
+        setKlass("hiddenTicket")
+        props.increaseCounter()
+    }
+
     return(
-        <div className="ticket">
+        <div className={klass} >
+            <button className="hideTicketButton" onClick={hide}>Hide</button>
             <h1>{props.title}</h1>
             <div className="content">{props.content}</div>
             <div className="footer">
@@ -21,6 +28,7 @@ function Ticket(props){
                 </div>
                 <div className="labels">{labels}</div>
             </div>
+
             
         </div>
     )

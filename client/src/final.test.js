@@ -82,6 +82,7 @@ describe(projectName, () => {
       })
       .reply(200, [mockData[0]]);
 
+    await page.click(".popupsearch")
     await page.type('#searchInput', filterText);
     expect(getFilteredTicketsMock.isDone()).toBe(true)
     await (new Promise((resolve) => setTimeout(resolve, 3000)));
