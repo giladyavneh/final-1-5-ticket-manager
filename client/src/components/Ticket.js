@@ -1,37 +1,47 @@
-import React, {useState, useEffect} from 'react';
-import "./Ticket.css"
+import React, { useState, useEffect } from 'react';
+import './Ticket.css';
 
-function Ticket(props){
-    const [klass,setKlass]=useState("ticket")
-    if (props.labels) {
-        var labels = props.labels.map(label => {
-            return (
-                <span className="label">{label}</span>
-                 )
-        })
-    }
-    useEffect(()=>setKlass("ticket"),[props.restore])
+function Ticket(prop) {
+  const {
+    increaseCounter,
+    restore,
+    labels,
+    title,
+    content,
+    email,
+    time,
+  } = prop;
+  const [klass, setKlass] = useState('ticket');
+  let labs;
+  if (labels) {
+    labs = labels.map((label) => (
+      <span className="label">{label}</span>
+    ));
+  }
+  useEffect(() => setKlass('ticket'), [restore]);
 
-    const hide=()=>{
-        setKlass("hiddenTicket")
-        props.increaseCounter()
-    }
+  const hide = () => {
+    setKlass('hiddenTicket');
+    increaseCounter();
+  };
 
-    return(
-        <div className={klass} >
-            <button className="hideTicketButton" onClick={hide}>Hide</button>
-            <h1>{props.title}</h1>
-            <div className="content">{props.content}</div>
-            <div className="footer">
-                <div className="info">
-                    <span>{props.email}</span> | <span>{props.time}</span>
-                </div>
-                <div className="labels">{labels}</div>
-            </div>
-
-            
+  return (
+    <div className={klass}>
+      <button type="button" className="hideTicketButton" onClick={hide}>Hide</button>
+      <h1>{title}</h1>
+      <div className="content">{content}</div>
+      <div className="footer">
+        <div className="info">
+          <span>{email}</span>
+          {' '}
+          |
+          <span>{time}</span>
         </div>
-    )
+        <div className="labels">{labs}</div>
+      </div>
+
+    </div>
+  );
 }
 
 export default Ticket;
