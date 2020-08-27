@@ -64,5 +64,6 @@ Use a popular style guide - Airbnb
 * Code quality: Variable naming, meaningful comments, logic separation into functions
 * Git usage: commit messages, and overall git usage flow
 
+
 ## Self Generated Gif:
 ![self-genrated-gif](./client/ui-testing-recording.gif)
