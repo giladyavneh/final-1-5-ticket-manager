@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Ticket from './components/Ticket'
 import PopUpSearch from'./components/PopUpSearch'
+import Carusel from "./components/Carusel"
 import './App.css';
 
 function App() {
@@ -19,7 +20,9 @@ function App() {
   }
   return (
     <main className="main">
+      <Carusel>
       {renderTickets()}
+      </Carusel>
       <PopUpSearch search={(input)=>search(input)}/>
     </main>
   );

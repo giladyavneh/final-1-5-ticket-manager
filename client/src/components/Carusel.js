@@ -2,18 +2,18 @@ import React, { useState, useEffect } from "react";
 import "./Carusel.css";
 
 function Carusel(props){
-    const [items,setItems]=useState([])
+    const [items,setItems]=useState([]);
+    const [styles,setStyles]=useState(Array(props.children.length).fill({}))
     useEffect(()=>{
-        const elements=props.children.map((item,i,slides)=>{
-            return renderItem(item,i,slides,true)
-        })
-        setItems(elements)
-    },[])
-    
-    function renderItem(item,i,slides,initial=false){
-        debugger;
-        let style={}
-            let R=400*slides.length/2
+        setStyles(getStyles())
+    },[props.children])
+    useEffect(()=>setItems(props.children.map((x,i)=><div key={i} style={styles[i]} className="carusel-element">{x}</div>)),[styles])
+    function getStyles(){
+        let elems=props.children
+        let result=[]
+        elems.forEach((element,i,slides) => {
+            let style={}
+            let R=400*slides.length/2.5
             let r=R/2
             const degree=(360/slides.length)*i
             const rad=degree*Math.PI/180
@@ -23,15 +23,18 @@ function Carusel(props){
             let high=(-1*Math.cos(rad)+1)*-10
             style.transform="translateX("+pos+"px) translateY("+high+"%)  rotateY("+ang+"deg) scale("+size+")"
             style.zIndex=Math.round(Math.abs(degree-180))
-            return <div key={i} index={i} style={style} className="carusel-element">{initial?item:item.props.children}</div>
+            result.push(style)
+        });
+        console.log(result)
+        return result;
     }
+    
     function next(){
-        setItems(slides=>{
-             return slides.map((item,i,slides)=>{
-                let index=item.props.index
-                let elem=renderItem(item,index+1===slides.length?0:index+1,slides)
-                return elem;
-             })
+        setStyles(state=>{
+            let styles=[...state]
+            let first=styles.shift()
+            styles.push(first)
+            return styles;
         })
     }
     return(
@@ -39,7 +42,7 @@ function Carusel(props){
             <div className="base">
                 {items}
             </div>
-            <button onClick={next}>next</button>
+            <button style={{position:"absolute",top:"-30px"}} onClick={()=>next()}>next</button>
         </div>
     )
 }
