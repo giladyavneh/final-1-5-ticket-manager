@@ -6,7 +6,7 @@ function Counter(props) {
     ? (
       <div>
         There
-        {props.count === 1 ? 'is' : 'are'}
+        {props.count === 1 ? ' is' : ' are'}
         {' '}
         <span id="hideTicketsCounter">{props.count}</span>
         {' '}
