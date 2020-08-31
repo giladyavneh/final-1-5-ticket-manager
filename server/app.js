@@ -22,6 +22,7 @@ app.post('/api/tickets/:ticketId/done', (req, res) => {
   let ticket = tickets.find(ticket => ticket.id === id);
   ticket.done = true;
   fs.writeFileSync("data.json", JSON.stringify(tickets));
+  res.json(ticket)
 });
 
 app.post('/api/tickets/:ticketId/undone', (req, res) => {
